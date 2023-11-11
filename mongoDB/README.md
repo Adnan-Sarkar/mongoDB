@@ -80,3 +80,51 @@ Using `mongosh (mongo + shell)` we can check our current database. So, we need t
     db.dropDatabase()
   ```
   > :warning: it will dropt current selected database
+
+## Insert Operation in MongoDB
+
+- **insert single document**
+
+  ```mongoDB
+   db.<collection name>.insertOne({
+    field1: value1,
+    field2: value2,
+    ...
+   })
+  ```
+
+- **insert multiple documents**
+
+  ```mongoDB
+   db.<collection name>.insertMany([
+    {field1: value1, ...},
+    {field1: value1, ...},
+    {field1: value1, ...},
+   ])
+  ```
+
+  > :warning: Be careful, when you insert many documents, it should be an array of documents
+
+- **show inserted documents**
+  ```mongoDB
+   db.<collection name>.find()
+  ```
+
+> :warning: If a field name contains special characters or spaces or start with digit using quotes ("") is mandatory.
+
+If we insert multiple documents and somehow got an error for any single document, what happend?
+
+In mongoDB, by default all the documents before the error one will be inserted successfully, but after the error document no one will be insert.
+
+But If we want to insert every document expect the error one? Then we should pass the `2nd` parameter to the `inserMany` method which is `{ ordered: false }`.
+
+```mongoDB
+   db.<collection name>.insertMany([
+    {...},
+    {...},
+    {...}
+    ],
+    { ordered: false })
+```
+
+> :warning: Collection names & field names are case-sensitive
