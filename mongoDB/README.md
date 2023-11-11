@@ -29,3 +29,54 @@ MongoDB is a popular open-source NoSQL database management system that storing d
 | Tables  | Collections |
 | Rows    | Documents   |
 | Columns | Fields      |
+
+## Create/Delete Database
+
+Using `mongosh (mongo + shell)` we can check our current database. So, we need to run those command in mongo shell.
+
+- **show databases**
+
+  ```mongoDB
+  show dbs
+  ```
+
+  or
+
+  ```mongoDB
+  show databases
+  ```
+
+- **create database**
+
+  ```mongoDB
+  // use <database name>
+  use employees
+  ```
+
+  > :warning: After create a db, it will not show untill you create at least one collection
+
+- **Create Collection**
+
+  ```mongoDB
+  // db.createCollection(<collection name>)
+  db.createCollection('demo')
+  ```
+
+- **show collections**
+
+  ```mongoDB
+  show collections
+  ```
+
+- **delete collection**
+
+  ```mongoDB
+    // db.<collection name>.drop()
+    db.demo.drop()
+  ```
+
+- **delete database**
+  ```mongoDB
+    db.dropDatabase()
+  ```
+  > :warning: it will dropt current selected database
