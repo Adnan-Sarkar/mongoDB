@@ -128,3 +128,16 @@ But If we want to insert every document expect the error one? Then we should pas
 ```
 
 > :warning: Collection names & field names are case-sensitive
+
+## Find Operation in MongoDB
+
+- **find single document**
+
+  ```mongoDB
+   db.<collection name>.findOne({ key: value });
+  ```
+
+- **find multiple documents**
+  ```mongoDB
+   db.<collection name>.find({ key: value });
+  ```
