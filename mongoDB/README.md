@@ -141,3 +141,55 @@ But If we want to insert every document expect the error one? Then we should pas
   ```mongoDB
    db.<collection name>.find({ key: value });
   ```
+
+## Import/Export JSON file in MongoDB
+
+- **without array of objects**
+
+  ```mongoDB
+   // without array of objects
+   {
+    ...
+   },
+   {
+    ...
+   }
+  ```
+
+  ```sh
+   mongoimport jsonfileName.json -d <database name> -c <collection name>
+  ```
+
+  Example
+
+  ```sh
+   mongoimport studentsInfo.json -d university -c students
+  ```
+
+- **with array of objects**
+  ```mongoDB
+   // with array of objects
+   [
+      {
+        ...
+      },
+      {
+        ...
+      }
+   ]
+  ```
+  ```sh
+   mongoimport jsonfileName.json -d <database name> -c <collection name> --jsonArray
+  ```
+  Example
+  ```sh
+   mongoimport studentsInfo.json -d university -c students --jsonArray
+  ```
+
+For export,
+
+```sh
+ mongoexport -d <database name> -c <collection name> -o <file directory with name>.json
+```
+
+`mongoimport` and `mongoexport` are command-line utilities that are part of the `MongoDB Database Tools`. Limited to imports of 16MB or smaller file size.
