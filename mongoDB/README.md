@@ -193,3 +193,70 @@ For export,
 ```
 
 `mongoimport` and `mongoexport` are command-line utilities that are part of the `MongoDB Database Tools`. Limited to imports of 16MB or smaller file size.
+
+## Comparison Operators in MongoDB
+
+All of these comparison operators are used for finding documents.
+
+| Comparison Operators | Description                                                                                      |
+| -------------------- | ------------------------------------------------------------------------------------------------ |
+| $eq                  | Equal Check (==)                                                                                 |
+| $ne                  | Not Equal Check (!=)                                                                             |
+| $gt                  | Greater than (>)                                                                                 |
+| $gte                 | Greater than or Equal (>=)                                                                       |
+| $lt                  | Less than (<)                                                                                    |
+| $lte                 | Less than or Equal (<=)                                                                          |
+| $in                  | selects the documents where the value of a field equals any value in the specified array         |
+| $nin                 | selects the documents where the value of a fields are not equal any value in the specified array |
+
+```mongoDB
+  db.<collection name>.find(
+    {
+      <field name> :
+        {
+          $operator: value
+        }
+    }
+  )
+```
+
+Example,
+
+```mongoDB
+  db.employees.find(
+    {
+      salary :
+        {
+          $gt: 30000
+        }
+    }
+  )
+```
+
+`$in` & `$nin`
+
+```mongoDB
+  db.<collection name>.find(
+    {
+      <field name> :
+        {
+          $operator: [value1, ...]
+        }
+    }
+  )
+```
+
+Example,
+
+```mongoDB
+  db.employees.find(
+    {
+      skills :
+        {
+          $in: ["Javascript", "MongoDB"]
+        }
+    }
+  )
+```
+
+It will find all the documents whose skills include "Javascript", "MongoDB" or both.
