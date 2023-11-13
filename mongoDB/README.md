@@ -316,3 +316,98 @@ MongoDb allows us to iterate the cursor manually.
   var data = db.<collection name>.find().skip(5)
   // skip first 5 documents
   ```
+
+## Logical Operators in MongoDB
+
+| Logical Operators |
+| ----------------- |
+| $and              |
+| $or               |
+| $nor              |
+| $not              |
+
+- **$and**
+  This operator performs a logical `AND` operation on an array of conditions, and selects the documents that satisfy all the conditions.
+
+  ```mongoDB
+    {
+      $and: [
+        {
+          // condition
+        },
+        {
+          // condition
+        },
+        ...
+      ]
+    }
+  ```
+
+  for example, we have to find all students with cgpa above 3.5 in the CSE department.
+
+  ```mongoDB
+    db.students.find({
+      $and: [
+        {
+          cgpa: { $gt: 3.5 }
+        },
+        {
+          department: "CSE"
+        }
+      ]
+    })
+  ```
+
+  Using $and operator is explicit, we can also use implicit `and` without using the operator.
+
+  ```mongoDB
+     db.students.find({
+      cgpa: { $gt: 3.5 },
+      department: "CSE"
+     })
+  ```
+
+  This will treat as a implicit `AND` operation.
+
+- **$or**
+  This operator is completely opposite of $and operator, where $and operator must satisfy all conditions but $or operator does not need to satisfy all conditions if one condition is true. Syntax is same as $and operator.
+
+  ```mongoDB
+    {
+      $or: [
+        {
+          // condition
+        },
+        {
+          // condition
+        },
+        ...
+      ]
+    }
+  ```
+
+- **$nor**
+  This operator performs the logical `NOR` operation. It's opposite of $and operator because $and operator needs to satisfy all condition whereas $nor operator retrieve only those documents that do not match all the given conditions in the array.
+
+  ```mongoDB
+    {
+      $nor: [
+        {
+          // condition
+        },
+        {
+          // condition
+        },
+        ...
+      ]
+    }
+  ```
+
+- **$not**
+  $nor operator is used for an array of conditions whereas it gives us documents that do not match all the given array of conditions, But the `$not`operator does the same task for only one condition. `$not` operator finds all the documents which do not match for the give condition.
+
+  ```mongoDB
+    db.<collection name>.find({
+      price: { $not: 200 }
+    })
+  ```
