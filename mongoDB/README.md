@@ -452,3 +452,34 @@ MongoDb allows us to iterate the cursor manually.
       }
     }
   ```
+
+## Projections in MongoDB
+
+Projection is used to include the specific fields in the returned documents. For example, if the documents contain huge fields but you need only a few specific fields then the projection is useful for filter out the fields and it will impact the performance.
+
+```mongoDB
+  db.<collection name>.find()
+  // return document like:
+  // {
+  //  name: "...",
+  //  age: ...,
+  //  address: "...",
+  //  ...
+  // }
+```
+
+This returned document has huge amount of fields, but you need only `name`, `age`, then we can use projection.
+
+```mongoDB
+  db.<collection name>
+  .find()
+  .projection({ name: 1, age: 1 })
+
+  // return document like:
+  // {
+  //  name: "...",
+  //  age: ...
+  // }
+```
+
+Syntax is fixed, So you have to specify the field name with value `1`.
