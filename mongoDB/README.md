@@ -523,3 +523,53 @@ To select them using dot notation like `adress.city` or `education.degreeName`.
 ```
 
 It will return documents that satisfy the condition.
+
+## $all vs $elemMatch
+
+- **$all**
+  The `$all` operator selects the documents where the value of a field is an array that contain all the specified elements. So, we have to pass the specified elements into an array and it's ensure that all the elements are presents in the document's specific field which is also an array.
+
+  ```mongoDB
+  {
+    <field name>: {
+      $all: [ <elemetn1>, <elemetn2>, ... ]
+    }
+  }
+  ```
+
+- **$elemMatch**
+  Suppose, we have a field which is an array of objects and each object's has name and age field also. Now, if we want to match multiple field then we can use `$elemMatch` operator.
+
+  ```mongoDB
+  // document
+  {
+    ...,
+    ...,
+    education: [
+      {
+        degreeName: "...",
+        year: ...
+      }
+    ]
+  }
+  ```
+
+  using `$elemMatch`
+
+  ```mongoDB
+    db.<collection name>
+    .find({
+      education: {
+        $elemMatch: {
+          degreeName: "...",
+          year: ...,
+        }
+      }
+    })
+  ```
+
+  It will find the documents that are matches at least one element of array.
+
+  Suppose we have array of objects and want to check every object's name field, then we should use `$all` operator because `[ <elemetn1>, <elemetn2>, ... ]` every elements have to match with the array of object' name.
+
+  So, we use `$all` for same field, but `$elemMatch` for multiple field.
