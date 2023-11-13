@@ -260,3 +260,59 @@ Example,
 ```
 
 It will find all the documents whose skills include "Javascript", "MongoDB" or both.
+
+## Cursors in MongoDB
+
+In MongoDB, when we use the `find()` method to retrieve specific documents from a collection, then this `find()` method returns us a pointer which is `pointer`. Pointer basically points to the specific documents that we want to find.
+
+Or, we can say that a cursor is apointer, and using this pointer we can access the documents.
+
+Now, the `find()` method return the cursor, now to access the document we need to iterate the cursor. In the `mongosh` (mongodb + shell), if the cursor is not assigned to a var keyword (javascript variable) then the mongosh automatically iterates the cursor up to 20 documents.
+
+MongoDb allows us to iterate the cursor manually.
+
+> :warning: If a cursor inactive for 10 min then MongoDB server will automatically close that cursor.
+
+```mongoDB
+  var data = db.<collection name>.find()
+```
+
+**Cursor Methods**
+| Method name |
+| ----------- |
+| count() |
+| limit() |
+| sort() |
+| skip() |
+
+- **count()**
+  count how many documents are pointed by cursor
+
+  ```mongoDB
+  var data = db.<collection name>.find().count()
+  ```
+
+- **limit()**
+  limit the return documents number. limit(3) means, cursor will return first 3 documents.
+
+  ```mongoDB
+  var data = db.<collection name>.find().limit(10)
+  ```
+
+- **sort()**
+  There is two type of sorting, `ascending order` or `descending order`. In this method we have to pass an object, where key should be a field name and value should be 1 (ascending order) or -1 (descending order). Field name is important because this method sorting the documents based on this field value.
+
+  ```mongoDB
+  var data = db.<collection name>.find().sort(
+    {
+      price: 1 // ascending order
+    }
+  )
+  ```
+
+- **skip()**
+  skip the documents from the beginning.
+  ```mongoDB
+  var data = db.<collection name>.find().skip(5)
+  // skip first 5 documents
+  ```
