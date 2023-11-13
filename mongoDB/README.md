@@ -411,3 +411,44 @@ MongoDb allows us to iterate the cursor manually.
       price: { $not: 200 }
     })
   ```
+
+## Elements Operators in MongoDB
+
+| Elements Operators |
+| ------------------ |
+| $exists            |
+| $type              |
+| $size              |
+
+- **$exists**
+  The `$exists` operator matches documents that contain or do not contain a specified field, also including documents that field value is `null`.
+
+  ```mongoDB
+    {
+      field: {
+        $exists: <boolean>
+      }
+    }
+  ```
+
+- **$type**
+  The `$type` operator selects documents where the value of the field matches with the specified `BSON data type`.
+
+  ```mongoDB
+    {
+      field: {
+        $type: <BSON data type>
+      }
+    }
+  ```
+
+- **$size**
+  The `$size` operator for matching the size of an array of a field. So, it returned the documents that the provided size matches the field's array size.
+
+  ```mongoDB
+    {
+      field: {
+        $size: <array length>
+      }
+    }
+  ```
