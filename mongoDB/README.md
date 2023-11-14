@@ -573,3 +573,182 @@ It will return documents that satisfy the condition.
   Suppose we have array of objects and want to check every object's name field, then we should use `$all` operator because `[ <elemetn1>, <elemetn2>, ... ]` every elements have to match with the array of object' name.
 
   So, we use `$all` for same field, but `$elemMatch` for multiple field.
+
+## Update Operations in MongoDB
+
+- updateOne() and updateMany()
+- Removing and renaming fields
+- Adding, removing items from array
+- Updating embedded documents (array & object)
+
+- **updateOne() and updateMany()**
+
+  ```mongoDB
+    db.<collection name>
+    .updateOne(
+      { filtering documents },
+      {
+        $set: {
+          existingFieldName: newValue,
+          newFieldName: newValue,
+          ...
+        }
+      }
+    )
+  ```
+
+  `filtering documents` means we are select the spcecific document that we want to update, other wise which document should update is create confusion.
+
+  `$set` operator is very sensitive, because it will replace the entire filed/object/array. In the example, we pass `newFieldName` that will be create and if we pass a value instead of object then the entire object will replace by the value.
+
+  ```mongoDB
+    db.<collection name>
+    .updateMany(
+      { filtering documents },
+      {
+        $set: {
+          existingFieldName: newValue,
+          newFieldName: newValue,
+          ...
+        }
+      }
+    )
+  ```
+
+  updateMany() do the same job, but update multiple documents.
+
+- **Removing and renaming fields**
+
+  For removing any field,
+
+  ```mongoDB
+    db.<collection name>
+    .updateOne(
+      { filtering documents },
+      {
+        $unset: {
+          filedName: 1
+        }
+      }
+    )
+  ```
+
+  The `$unset` method simply remove the specified field.
+
+  For renaming any field,
+
+  ```mongoDB
+    db.<collection name>
+    .updateOne(
+      { filtering documents },
+      {
+        $rename: {
+          oldFieldName: "newFieldName"
+        }
+      }
+    )
+  ```
+
+  The `$rename` method simply rename the specified field.
+
+- **Adding, removing items from array**
+  For adding a item in array,
+
+  ```mongoDB
+    db.<collection name>
+    .updateOne(
+      { filtering documents },
+      {
+        $push: {
+          arrayFieldName: "newElement"
+        }
+      }
+    )
+  ```
+
+  The `$push` method simply add an item to the specified array field, and it can add duplicate items.
+
+  For removing a document from an array,
+
+  ```mongoDB
+    db.<collection name>
+    .updateOne(
+      { filtering documents },
+      {
+        $pop: {
+          arrayFieldName: 1
+        }
+      }
+    )
+  ```
+
+  Pass `$pop` a value of -1 to remove the first element of an array and 1 to remove the last element in an array.
+
+  Or using `$pull` operator,
+
+  ```mongoDB
+    {
+      $pull: {
+        fieldName1: value or condition,
+        fieldName2: value or condition,
+        ...
+      }
+    }
+  ```
+
+  The `$pull` operator removes from an existing array all values that match a specified condition.
+
+  Or using `$pullAll` operator,
+
+  ```mongoDB
+    {
+      $pullAll: {
+        fieldName1: [ value1, value2, ... ],
+        ...
+      }
+    }
+  ```
+
+  The `$pullAll` operator removes all the specified values from an existing array.
+
+- **Updating embedded documents (array & object)**
+
+  For updation a field which is inside an array of object (embedded documents), then we can update using the positional operator `$`.
+
+  ```mongoDB
+  // document like
+    {
+      ...,
+      ...,
+      interests: [
+        {
+          bookTitle: "...",
+          bookPrice: ...,
+          authorName: "...",
+          ...
+        },
+        ...
+      ]
+    }
+  ```
+
+  now for update the bookPrice field where the bookTitle is "...",
+
+  ```mongoDB
+   db.<collection name>
+    .updateOne(
+      {
+        _id: ...,
+        "interests.bookTitle": "..."
+      },
+      {
+        $set: {
+          "interests.$.bookPrice": ...
+        }
+      }
+    )
+  ```
+
+  This `$` positional operator identifies an element in an array to update without explicitly specifying the position of the element in the array.
+
+  This `$` positional operator acts as a placeholder for the first element that matches the query document.
