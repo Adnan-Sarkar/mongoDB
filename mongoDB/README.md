@@ -752,3 +752,15 @@ It will return documents that satisfy the condition.
   This `$` positional operator identifies an element in an array to update without explicitly specifying the position of the element in the array.
 
   This `$` positional operator acts as a placeholder for the first element that matches the query document.
+
+## Delete Operations in MongoDB
+
+The delete operations are used to remove documents from a collection. There are 2 main delete methods to perform delete operation, `deleteOne` and `deleteMany`.
+
+```mongoDB
+  db.<collection name>.deleteOne( { filtering document } )
+```
+
+```mongoDB
+  db.<collection name>.deleteMany( { age: 20 } )
+```
