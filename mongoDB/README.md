@@ -836,3 +836,46 @@ Few aggregation frameworks operators like `$match`, `$project`, `$group`, `$sort
     ]
   )
   ```
+
+- **$project**
+
+  This `$project` operator is similar to `project()` method, where we can decide which fields will be include in the every documents result.
+
+  ```mongoDB
+  db.<collection name>.aggregate(
+    [
+      // stage - 1
+      {
+        $project: {
+          name: 1,
+          age: 1,
+          address: 1,
+          ...
+        }
+      }
+    ]
+  )
+  ```
+
+  We can use more operator like `$add`, `$divide`, `$multiply`, `$subtract`, ... arithmetic operation inside $project stage to reshape/transform any data.
+
+  ```mongoDB
+  db.<collection name>.aggregate(
+    [
+      // stage - 1
+      {
+        $project: {
+          name: 1,
+          bonus: {
+            $multiply: [ "$salary", 5 ]
+          },
+          ...
+        }
+      }
+    ]
+  )
+  ```
+
+  `bonus` field is created in the $project stage and this type of operation we can't do in `project()` method.
+
+  The result documents will have only these fields.<br><br>
