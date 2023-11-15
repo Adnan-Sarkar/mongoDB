@@ -798,3 +798,41 @@ Benefits of using aggregation,
 The array is mainly the pipeline and every stage is performed one way, first `stage 1` is executed and generate calculated documents then `stage 2` performs the operation on these documents.
 
 Few aggregation frameworks operators like `$match`, `$project`, `$group`, `$sort`, `$limit`, `$addFields`, `$merge`, `$out`, `$unwind`, and many more.
+
+- **$match**
+
+  The `$match` stage is similar to the `find()` method. At this stage, we can filter out documents based on the matched conditions.
+
+  ```mongoDB
+  db.<collection name>.aggregate(
+    [
+      // stage - 1
+      {
+        $match: {
+          conditions
+        }
+      },
+
+      ...
+    ]
+  )
+  ```
+
+  example,
+
+  ```mongoDB
+  db.<collection name>.aggregate(
+    [
+      // stage - 1
+      {
+        $match: {
+          age: {
+            $gte: 18
+          }
+        }
+      },
+
+      ...
+    ]
+  )
+  ```
