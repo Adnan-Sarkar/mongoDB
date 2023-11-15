@@ -764,3 +764,37 @@ The delete operations are used to remove documents from a collection. There are 
 ```mongoDB
   db.<collection name>.deleteMany( { age: 20 } )
 ```
+
+## Aggregation Framework in MongoDB
+
+Aggregation is the process of performing transformations on documents and combining them to produce computed results.
+
+Aggregation consist of multiple `pipeline` stages, each performing a specific operation on the input data.
+
+Benefits of using aggregation,
+
+- Aggregating data: complex calculations and operations are possible.
+- Advanced transformations: Data can be combined, reshaped and computed for insights.
+- Effecient processing: aggregation handles large datasets efficiently.
+
+```mongoDB
+  db.<collection name>.aggregate(
+    [
+      // stage - 1
+      {
+        ....
+      },
+
+      // stage - 2
+      {
+        ....
+      },
+
+      ...
+    ]
+  )
+```
+
+The array is mainly the pipeline and every stage is performed one way, first `stage 1` is executed and generate calculated documents then `stage 2` performs the operation on these documents.
+
+Few aggregation frameworks operators like `$match`, `$project`, `$group`, `$sort`, `$limit`, `$addFields`, `$merge`, `$out`, `$unwind`, and many more.
