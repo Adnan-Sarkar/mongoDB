@@ -879,3 +879,136 @@ Few aggregation frameworks operators like `$match`, `$project`, `$group`, `$sort
   `bonus` field is created in the $project stage and this type of operation we can't do in `project()` method.
 
   The result documents will have only these fields.<br><br>
+
+- **$group**
+
+  The `$group` stage groups the documents by specified fields and performs aggregate operations on grouped data.
+
+  ```mongoDB
+  db.<collection name>.aggregate(
+  [
+    // stage - 1
+    {
+      $group: {
+        _id: "<field name for grouping>", // required
+        field1: { // optional
+          <accumulator1> : <expression1>,
+          ...
+        }
+      }
+    }
+  ]
+  )
+  ```
+
+  `-id` is create the group based on field that we provide, and there is some `accumulator` operators we can use to perform any specific operations on group data.
+
+  | Accumulator Operator |
+  | -------------------- |
+  | $avg                 |
+  | $count               |
+  | $max                 |
+  | $min                 |
+  | $sum                 |
+  | $push                |
+  | ...                  |
+  | ...                  |
+
+  - $avg
+
+    ```mongoDB
+    db.<collection name>.aggregate(
+    [
+      $group: {
+        _id: "$gender",
+        avg: {
+            $avg: "$age"
+        }
+
+      }
+    ]
+    )
+    ```
+
+    The `$avg` operator will avg the `age` of every documents of the group. So, if 5 different groups are created then each group has few documents and $avg operator will calculate avg for 5 different groups.
+
+    ```mongoDB
+      // output look like,
+
+      // group 1
+      {
+        "_id" : "Male",
+        "avg" : 47.21052631578947
+      },
+
+      // group 2
+      {
+        "_id" : "Female",
+        "avg" : 56.4
+      },
+
+      ...
+    ```
+
+  - $count
+
+    ```mongoDB
+    db.<collection name>.aggregate(
+    [
+      {
+        $group: {
+          _id: "$gender",
+          count: {
+              $count: {}
+          }
+        }
+      }
+    ]
+    )
+    ```
+
+    The `$count` operator will count the total documents number for each group. This `$count` operator does not accept any parameters.
+
+  - $max
+
+    ```mongoDB
+    db.<collection name>.aggregate(
+    [
+      {
+        $group: {
+          _id: "$gender",
+          maxAge: {
+              $max: "$age"
+          }
+
+        }
+      }
+    ]
+    )
+    ```
+
+    The `$max` operator returns the maximum value of specified field for each group.
+
+    The syntax is same for `$min`, `$sum`.<br><br>
+
+  - $push
+
+    ```mongoDB
+    db.<collection name>.aggregate(
+    [
+     {
+       $group: {
+        _id: "$gender",
+        emails: {
+            $push: "$email"
+        }
+
+       }
+     }
+    ]
+    )
+    ```
+
+    The `$push` operator push all the specified field into an array for each group.
+
+    There are more `accumulator` operators but these are commonly used.<br><br>
