@@ -1012,3 +1012,144 @@ Few aggregation frameworks operators like `$match`, `$project`, `$group`, `$sort
     The `$push` operator push all the specified field into an array for each group.
 
     There are more `accumulator` operators but these are commonly used.<br><br>
+
+- **$sort**
+  This is also similar to `sort()` method.
+
+  ```mongoDB
+   db.<collection name>.aggregate(
+   [
+     {
+        $sort: {
+            age: 1
+        }
+     }
+   ]
+   )
+  ```
+
+- **$limit**
+  This is also similar to `limit()` method.
+
+  ```mongoDB
+   db.<collection name>.aggregate(
+   [
+     {
+        $limit: 5 // positive 64-bit integer
+     }
+   ]
+   )
+  ```
+
+- **$addFields**
+  This operator is for adding new field to the group documents
+
+  ```mongoDB
+   db.<collection name>.aggregate(
+   [
+     {
+         $addFields: {
+            <newField>: <new value>,
+            ...
+          }
+     }
+   ]
+   )
+  ```
+
+  But, new fileds is not add to the main collection because we are still finding documents based on some condition and operation not updating the collection.<br><br>
+
+- **$merge**
+
+  `$addFields` is not add the main collection, So, for adding new fields to the main collection we can use `$merge` operator.
+
+  ```mongoDB
+   db.<collection name>.aggregate(
+   [
+    {
+      ...
+    },
+
+    ...,
+
+    // the last stage
+     {
+         $merge: "<collection name>"
+     }
+   ]
+   )
+  ```
+
+  > :warning: The $merge stage must be the last stage in the pipeline.
+
+- **$out**
+
+  Sometimes we may need to create a new collection based on the aggregation result, and then the `$out` operator does this task.
+
+  ```mongoDB
+   db.<collection name>.aggregate(
+   [
+    {
+      ...
+    },
+
+    ...,
+
+    // the last stage
+     {
+         $out: "<output collection name>"
+         // or
+         $out: {
+            db: "<output db name>",
+            coll: "<output collection name>"
+          }
+     }
+   ]
+   )
+  ```
+
+  > :warning: The $out stage must be the last stage in the pipeline.
+
+- **$unwind**
+  Deconstructs an array field from the input documents to output a document for each element. Each output document is the input document with the value of the array field replaced by the element.
+
+  ```mongoDB
+   // demo document
+   {
+    _id: ...,
+    skills: [ "...", "...", "...", ... ],
+    ...
+   }
+  ```
+
+  Now `$unwind` will deconstructs the skills array and create multiple documents for the same `_id` with single skills element.
+
+  ```mongoDB
+   db.<collection name>.aggregate(
+   [
+     {
+         $unwind: <array field name>
+     },
+     {
+      ...
+     },
+     ...
+   ]
+   )
+  ```
+
+  Now `$unwind` create documents like,
+
+  ```mongoDB
+   {
+    _id: 123,
+    skills: <first element>,
+   },
+   {
+    _id: 123,
+    skills: <second element>,
+   },
+   ...
+  ```
+
+  `$unwind` is useful with `$group`.
