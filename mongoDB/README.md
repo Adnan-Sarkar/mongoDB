@@ -543,7 +543,7 @@ This returned document has huge amount of fields, but you need only `name`, `age
 
 Syntax is fixed, So you have to specify the field name with value `1`.
 
-## Specificy Array & Object Field in MongoDB
+## Specify Array & Object Field in MongoDB
 
 Until now, we used direct field name with operators, but what happend if the field contain object or array of object?
 
