@@ -24,15 +24,15 @@
 8. [Cursors in MongoDB](#cursors-in-mongodb)
    - 8.1 [Cursor Methods](#cursor-methods)
 9. [Logical Operators in MongoDB](#logical-operators-in-mongodb)
-   - 9.1 [\$and Operator](#and-operator)
-   - 9.2 [\$or Operator](#or-operator)
-   - 9.3 [\$nor Operator](#nor-operator)
-   - 9.4 [\$not Operator](#not-operator)
+   - 9.1 [\$and Operator](#and)
+   - 9.2 [\$or Operator](#or)
+   - 9.3 [\$nor Operator](#nor)
+   - 9.4 [\$not Operator](#not)
 10. [Elements Operators in MongoDB](#elements-operators-in-mongodb)
 
-- 10.1 [\$exists Operator](#exists-operator)
-- 10.2 [\$type Operator](#type-operator)
-- 10.3 [\$size Operator](#size-operator)
+- 10.1 [\$exists Operator](#exists)
+- 10.2 [\$type Operator](#type)
+- 10.3 [\$size Operator](#size)
 
 11. [Projections in MongoDB](#projections-in-mongodb)
 12. [Specify Array & Object Field in MongoDB](#specify-array--object-field-in-mongodb)
@@ -42,7 +42,7 @@
 - 14.1 [updateOne() and updateMany()](#updateone-and-updatemany)
 - 14.2 [Removing and Renaming Fields](#removing-and-renaming-fields)
 - 14.3 [Adding, Removing Items from Array](#adding-removing-items-from-array)
-- 14.4 [Updating Embedded Documents](#updating-embedded-documents)
+- 14.4 [Updating Embedded Documents (Array & Object)](#updating-embedded-documents-array--object)
 
 15. [Delete Operations in MongoDB](#delete-operations-in-mongodb)
 16. [Aggregation Framework in MongoDB](#aggregation-framework-in-mongodb)
@@ -63,23 +63,29 @@ MongoDB is a popular open-source NoSQL database management system that storing d
 
 ## Why MongoDB?
 
-- **Schema-less**
-  This is the most significant key feature for NOSQL DBMS, MongoDB does not required pre-defined schema design. Every `document` inside a `collection` can have different structure which is gives us more flexibility.<br><br>
+### **Schema-less**
 
-- **Scalability**
-  MongoDB can scale `horizontally` with multiple servers which makes it suitable for handling huge amount of data and high level of traffic.
+This is the most significant key feature for NOSQL DBMS, MongoDB does not required pre-defined schema design. Every `document` inside a `collection` can have different structure which is gives us more flexibility.<br><br>
 
-- **Query Language**
-  MongoDB uses JSON based query language which can supports a wide range of queries, including `fiend queries`, `range queries` and `regular expressions`.
+### **Scalability**
 
-- **Indexing**
-  MongoDB supports various types of indexes, which is makes query performance
+MongoDB can scale `horizontally` with multiple servers which makes it suitable for handling huge amount of data and high level of traffic.
 
-- **Aggregation Framework**
-  It has a powerful `aggregation framework` for performing complex queries.
+### **Query Language**
 
-- **Community**
-  MongoDB has a large and active community, rich ecosystem of tools, libraries and frameworks which makes it famous day by day.
+MongoDB uses JSON based query language which can supports a wide range of queries, including `fiend queries`, `range queries` and `regular expressions`.
+
+### **Indexing**
+
+MongoDB supports various types of indexes, which is makes query performance
+
+### **Aggregation Framework**
+
+It has a powerful `aggregation framework` for performing complex queries.
+
+### **Community**
+
+MongoDB has a large and active community, rich ecosystem of tools, libraries and frameworks which makes it famous day by day.
 
 ## Difference Between SQL & NoSQL
 
@@ -93,81 +99,84 @@ MongoDB is a popular open-source NoSQL database management system that storing d
 
 Using `mongosh (mongo + shell)` we can check our current database. So, we need to run those command in mongo shell.
 
-- **show databases**
+### **show databases**
 
-  ```mongoDB
-  show dbs
-  ```
+```mongoDB
+show dbs
+```
 
-  or
+or
 
-  ```mongoDB
-  show databases
-  ```
+```mongoDB
+show databases
+```
 
-- **create database**
+### **create database**
 
-  ```mongoDB
-  // use <database name>
-  use employees
-  ```
+```mongoDB
+// use <database name>
+use employees
+```
 
-  > :warning: After create a db, it will not show untill you create at least one collection
+> :warning: After create a db, it will not show untill you create at least one collection
 
-- **Create Collection**
+### **Create Collection**
 
-  ```mongoDB
-  // db.createCollection(<collection name>)
-  db.createCollection('demo')
-  ```
+```mongoDB
+// db.createCollection(<collection name>)
+db.createCollection('demo')
+```
 
-- **show collections**
+### **show collections**
 
-  ```mongoDB
-  show collections
-  ```
+```mongoDB
+show collections
+```
 
-- **delete collection**
+### **delete collection**
 
-  ```mongoDB
-    // db.<collection name>.drop()
-    db.demo.drop()
-  ```
+```mongoDB
+  // db.<collection name>.drop()
+  db.demo.drop()
+```
 
-- **delete database**
-  ```mongoDB
-    db.dropDatabase()
-  ```
-  > :warning: it will dropt current selected database
+### **delete database**
+
+```mongoDB
+  db.dropDatabase()
+```
+
+> :warning: it will dropt current selected database
 
 ## Insert Operation in MongoDB
 
-- **insert single document**
+### **insert single document**
 
-  ```mongoDB
-   db.<collection name>.insertOne({
-    field1: value1,
-    field2: value2,
-    ...
-   })
-  ```
+```mongoDB
+ db.<collection name>.insertOne({
+  field1: value1,
+  field2: value2,
+  ...
+ })
+```
 
-- **insert multiple documents**
+### **insert multiple documents**
 
-  ```mongoDB
-   db.<collection name>.insertMany([
-    {field1: value1, ...},
-    {field1: value1, ...},
-    {field1: value1, ...},
-   ])
-  ```
+```mongoDB
+ db.<collection name>.insertMany([
+  {field1: value1, ...},
+  {field1: value1, ...},
+  {field1: value1, ...},
+ ])
+```
 
-  > :warning: Be careful, when you insert many documents, it should be an array of documents
+> :warning: Be careful, when you insert many documents, it should be an array of documents
 
-- **show inserted documents**
-  ```mongoDB
-   db.<collection name>.find()
-  ```
+### **show inserted documents**
+
+```mongoDB
+ db.<collection name>.find()
+```
 
 > :warning: If a field name contains special characters or spaces or start with digit using quotes ("") is mandatory.
 
@@ -190,60 +199,67 @@ But If we want to insert every document expect the error one? Then we should pas
 
 ## Find Operation in MongoDB
 
-- **find single document**
+### **find single document**
 
-  ```mongoDB
-   db.<collection name>.findOne({ key: value });
-  ```
+```mongoDB
+ db.<collection name>.findOne({ key: value });
+```
 
-- **find multiple documents**
-  ```mongoDB
-   db.<collection name>.find({ key: value });
-  ```
+### **find multiple documents**
+
+```mongoDB
+ db.<collection name>.find({ key: value });
+```
 
 ## Import/Export JSON file in MongoDB
 
-- **without array of objects**
+### **without array of objects**
 
-  ```mongoDB
-   // without array of objects
-   {
-    ...
-   },
-   {
-    ...
-   }
-  ```
+```mongoDB
+ // without array of objects
+ {
+  ...
+ },
+ {
+  ...
+ }
+```
 
-  ```sh
-   mongoimport jsonfileName.json -d <database name> -c <collection name>
-  ```
+```sh
+ mongoimport jsonfileName.json -d <database name> -c <collection name>
+```
 
-  Example
+Example
 
-  ```sh
-   mongoimport studentsInfo.json -d university -c students
-  ```
+```sh
+ mongoimport studentsInfo.json -d university -c students
+```
 
-- **with array of objects**
-  ```mongoDB
-   // with array of objects
-   [
-      {
-        ...
-      },
-      {
-        ...
-      }
-   ]
-  ```
-  ```sh
-   mongoimport jsonfileName.json -d <database name> -c <collection name> --jsonArray
-  ```
-  Example
-  ```sh
-   mongoimport studentsInfo.json -d university -c students --jsonArray
-  ```
+### **with array of objects**
+
+```mongoDB
+ // with array of objects
+ [
+    {
+      ...
+    },
+    {
+      ...
+    }
+ ]
+```
+
+```sh
+ mongoimport jsonfileName.json -d <database name> -c <collection name> --jsonArray
+```
+
+Example
+
+```sh
+ mongoimport studentsInfo.json -d university -c students --jsonArray
+```
+
+### **export**
 
 For export,
 
@@ -336,45 +352,51 @@ MongoDb allows us to iterate the cursor manually.
   var data = db.<collection name>.find()
 ```
 
-**Cursor Methods**
+### **Cursor Methods**
+
 | Method name |
 | ----------- |
-| count() |
-| limit() |
-| sort() |
-| skip() |
+| count()     |
+| limit()     |
+| sort()      |
+| skip()      |
 
-- **count()**
-  count how many documents are pointed by cursor
+### **count()**
 
-  ```mongoDB
-  var data = db.<collection name>.find().count()
-  ```
+count how many documents are pointed by cursor
 
-- **limit()**
-  limit the return documents number. limit(3) means, cursor will return first 3 documents.
+```mongoDB
+var data = db.<collection name>.find().count()
+```
 
-  ```mongoDB
-  var data = db.<collection name>.find().limit(10)
-  ```
+### **limit()**
 
-- **sort()**
-  There is two type of sorting, `ascending order` or `descending order`. In this method we have to pass an object, where key should be a field name and value should be 1 (ascending order) or -1 (descending order). Field name is important because this method sorting the documents based on this field value.
+limit the return documents number. limit(3) means, cursor will return first 3 documents.
 
-  ```mongoDB
-  var data = db.<collection name>.find().sort(
-    {
-      price: 1 // ascending order
-    }
-  )
-  ```
+```mongoDB
+var data = db.<collection name>.find().limit(10)
+```
 
-- **skip()**
-  skip the documents from the beginning.
-  ```mongoDB
-  var data = db.<collection name>.find().skip(5)
-  // skip first 5 documents
-  ```
+### **sort()**
+
+There is two type of sorting, `ascending order` or `descending order`. In this method we have to pass an object, where key should be a field name and value should be 1 (ascending order) or -1 (descending order). Field name is important because this method sorting the documents based on this field value.
+
+```mongoDB
+var data = db.<collection name>.find().sort(
+  {
+    price: 1 // ascending order
+  }
+)
+```
+
+### **skip()**
+
+skip the documents from the beginning.
+
+```mongoDB
+var data = db.<collection name>.find().skip(5)
+// skip first 5 documents
+```
 
 ## Logical Operators in MongoDB
 
@@ -385,91 +407,95 @@ MongoDb allows us to iterate the cursor manually.
 | $nor              |
 | $not              |
 
-- **$and**
-  This operator performs a logical `AND` operation on an array of conditions, and selects the documents that satisfy all the conditions.
+### **$and**
 
-  ```mongoDB
-    {
-      $and: [
-        {
-          // condition
-        },
-        {
-          // condition
-        },
-        ...
-      ]
-    }
-  ```
+This operator performs a logical `AND` operation on an array of conditions, and selects the documents that satisfy all the conditions.
 
-  for example, we have to find all students with cgpa above 3.5 in the CSE department.
+```mongoDB
+  {
+    $and: [
+      {
+        // condition
+      },
+      {
+        // condition
+      },
+      ...
+    ]
+  }
+```
 
-  ```mongoDB
-    db.students.find({
-      $and: [
-        {
-          cgpa: { $gt: 3.5 }
-        },
-        {
-          department: "CSE"
-        }
-      ]
-    })
-  ```
+for example, we have to find all students with cgpa above 3.5 in the CSE department.
 
-  Using $and operator is explicit, we can also use implicit `and` without using the operator.
+```mongoDB
+  db.students.find({
+    $and: [
+      {
+        cgpa: { $gt: 3.5 }
+      },
+      {
+        department: "CSE"
+      }
+    ]
+  })
+```
 
-  ```mongoDB
-     db.students.find({
-      cgpa: { $gt: 3.5 },
-      department: "CSE"
-     })
-  ```
+Using $and operator is explicit, we can also use implicit `and` without using the operator.
 
-  This will treat as a implicit `AND` operation.
+```mongoDB
+   db.students.find({
+    cgpa: { $gt: 3.5 },
+    department: "CSE"
+   })
+```
 
-- **$or**
-  This operator is completely opposite of $and operator, where $and operator must satisfy all conditions but $or operator does not need to satisfy all conditions if one condition is true. Syntax is same as $and operator.
+This will treat as a implicit `AND` operation.
 
-  ```mongoDB
-    {
-      $or: [
-        {
-          // condition
-        },
-        {
-          // condition
-        },
-        ...
-      ]
-    }
-  ```
+### **$or**
 
-- **$nor**
-  This operator performs the logical `NOR` operation. It's opposite of $and operator because $and operator needs to satisfy all condition whereas $nor operator retrieve only those documents that do not match all the given conditions in the array.
+This operator is completely opposite of $and operator, where $and operator must satisfy all conditions but $or operator does not need to satisfy all conditions if one condition is true. Syntax is same as $and operator.
 
-  ```mongoDB
-    {
-      $nor: [
-        {
-          // condition
-        },
-        {
-          // condition
-        },
-        ...
-      ]
-    }
-  ```
+```mongoDB
+  {
+    $or: [
+      {
+        // condition
+      },
+      {
+        // condition
+      },
+      ...
+    ]
+  }
+```
 
-- **$not**
-  $nor operator is used for an array of conditions whereas it gives us documents that do not match all the given array of conditions, But the `$not`operator does the same task for only one condition. `$not` operator finds all the documents which do not match for the give condition.
+### **$nor**
 
-  ```mongoDB
-    db.<collection name>.find({
-      price: { $not: 200 }
-    })
-  ```
+This operator performs the logical `NOR` operation. It's opposite of $and operator because $and operator needs to satisfy all condition whereas $nor operator retrieve only those documents that do not match all the given conditions in the array.
+
+```mongoDB
+  {
+    $nor: [
+      {
+        // condition
+      },
+      {
+        // condition
+      },
+      ...
+    ]
+  }
+```
+
+### **$not**
+
+$nor operator is used for an array of conditions whereas it gives us documents that do not match all the given array of conditions, But the `$not`operator does the same task for only one condition. `$not` operator finds all the documents which do not match for the give condition.
+
+```mongoDB
+  db.<collection name>.find({
+    price: { $not: 200 }
+  })
+```
 
 ## Elements Operators in MongoDB
 
@@ -479,38 +505,41 @@ MongoDb allows us to iterate the cursor manually.
 | $type              |
 | $size              |
 
-- **$exists**
-  The `$exists` operator matches documents that contain or do not contain a specified field, also including documents that field value is `null`.
+### **$exists**
 
-  ```mongoDB
-    {
-      field: {
-        $exists: <boolean>
-      }
+The `$exists` operator matches documents that contain or do not contain a specified field, also including documents that field value is `null`.
+
+```mongoDB
+  {
+    field: {
+      $exists: <boolean>
     }
-  ```
+  }
+```
 
-- **$type**
-  The `$type` operator selects documents where the value of the field matches with the specified `BSON data type`.
+### **$type**
 
-  ```mongoDB
-    {
-      field: {
-        $type: <BSON data type>
-      }
+The `$type` operator selects documents where the value of the field matches with the specified `BSON data type`.
+
+```mongoDB
+  {
+    field: {
+      $type: <BSON data type>
     }
-  ```
+  }
+```
 
-- **$size**
-  The `$size` operator for matching the size of an array of a field. So, it returned the documents that the provided size matches the field's array size.
+### **$size**
 
-  ```mongoDB
-    {
-      field: {
-        $size: <array length>
-      }
+The `$size` operator for matching the size of an array of a field. So, it returned the documents that the provided size matches the field's array size.
+
+```mongoDB
+  {
+    field: {
+      $size: <array length>
     }
-  ```
+  }
+```
 
 ## Projections in MongoDB
 
@@ -583,55 +612,57 @@ To select them using dot notation like `adress.city` or `education.degreeName`.
 
 It will return documents that satisfy the condition.
 
-## $all vs $elemMatch
+## \$all vs \$elemMatch
 
-- **$all**
-  The `$all` operator selects the documents where the value of a field is an array that contain all the specified elements. So, we have to pass the specified elements into an array and it's ensure that all the elements are presents in the document's specific field which is also an array.
+### **$all**
 
-  ```mongoDB
-  {
-    <field name>: {
-      $all: [ <elemetn1>, <elemetn2>, ... ]
+The `$all` operator selects the documents where the value of a field is an array that contain all the specified elements. So, we have to pass the specified elements into an array and it's ensure that all the elements are presents in the document's specific field which is also an array.
+
+```mongoDB
+{
+  <field name>: {
+    $all: [ <elemetn1>, <elemetn2>, ... ]
+  }
+}
+```
+
+### **$elemMatch**
+
+Suppose, we have a field which is an array of objects and each object's has name and age field also. Now, if we want to match multiple field then we can use `$elemMatch` operator.
+
+```mongoDB
+// document
+{
+  ...,
+  ...,
+  education: [
+    {
+      degreeName: "...",
+      year: ...
     }
-  }
-  ```
+  ]
+}
+```
 
-- **$elemMatch**
-  Suppose, we have a field which is an array of objects and each object's has name and age field also. Now, if we want to match multiple field then we can use `$elemMatch` operator.
+using `$elemMatch`
 
-  ```mongoDB
-  // document
-  {
-    ...,
-    ...,
-    education: [
-      {
+```mongoDB
+  db.<collection name>
+  .find({
+    education: {
+      $elemMatch: {
         degreeName: "...",
-        year: ...
+        year: ...,
       }
-    ]
-  }
-  ```
+    }
+  })
+```
 
-  using `$elemMatch`
+It will find the documents that are matches at least one element of array.
 
-  ```mongoDB
-    db.<collection name>
-    .find({
-      education: {
-        $elemMatch: {
-          degreeName: "...",
-          year: ...,
-        }
-      }
-    })
-  ```
+Suppose we have array of objects and want to check every object's name field, then we should use `$all` operator because `[ <elemetn1>, <elemetn2>, ... ]` every elements have to match with the array of object' name.
 
-  It will find the documents that are matches at least one element of array.
-
-  Suppose we have array of objects and want to check every object's name field, then we should use `$all` operator because `[ <elemetn1>, <elemetn2>, ... ]` every elements have to match with the array of object' name.
-
-  So, we use `$all` for same field, but `$elemMatch` for multiple field.
+So, we use `$all` for same field, but `$elemMatch` for multiple field.
 
 ## Update Operations in MongoDB
 
@@ -640,177 +671,178 @@ It will return documents that satisfy the condition.
 - Adding, removing items from array
 - Updating embedded documents (array & object)
 
-- **updateOne() and updateMany()**
+### **updateOne() and updateMany()**
 
-  ```mongoDB
-    db.<collection name>
-    .updateOne(
-      { filtering documents },
-      {
-        $set: {
-          existingFieldName: newValue,
-          newFieldName: newValue,
-          ...
-        }
-      }
-    )
-  ```
-
-  `filtering documents` means we are select the spcecific document that we want to update, other wise which document should update is create confusion.
-
-  `$set` operator is very sensitive, because it will replace the entire filed/object/array. In the example, we pass `newFieldName` that will be create and if we pass a value instead of object then the entire object will replace by the value.
-
-  ```mongoDB
-    db.<collection name>
-    .updateMany(
-      { filtering documents },
-      {
-        $set: {
-          existingFieldName: newValue,
-          newFieldName: newValue,
-          ...
-        }
-      }
-    )
-  ```
-
-  updateMany() do the same job, but update multiple documents.
-
-- **Removing and renaming fields**
-
-  For removing any field,
-
-  ```mongoDB
-    db.<collection name>
-    .updateOne(
-      { filtering documents },
-      {
-        $unset: {
-          filedName: 1
-        }
-      }
-    )
-  ```
-
-  The `$unset` method simply remove the specified field.
-
-  For renaming any field,
-
-  ```mongoDB
-    db.<collection name>
-    .updateOne(
-      { filtering documents },
-      {
-        $rename: {
-          oldFieldName: "newFieldName"
-        }
-      }
-    )
-  ```
-
-  The `$rename` method simply rename the specified field.
-
-- **Adding, removing items from array**
-  For adding a item in array,
-
-  ```mongoDB
-    db.<collection name>
-    .updateOne(
-      { filtering documents },
-      {
-        $push: {
-          arrayFieldName: "newElement"
-        }
-      }
-    )
-  ```
-
-  The `$push` method simply add an item to the specified array field, and it can add duplicate items.
-
-  For removing a document from an array,
-
-  ```mongoDB
-    db.<collection name>
-    .updateOne(
-      { filtering documents },
-      {
-        $pop: {
-          arrayFieldName: 1
-        }
-      }
-    )
-  ```
-
-  Pass `$pop` a value of -1 to remove the first element of an array and 1 to remove the last element in an array.
-
-  Or using `$pull` operator,
-
-  ```mongoDB
+```mongoDB
+  db.<collection name>
+  .updateOne(
+    { filtering documents },
     {
-      $pull: {
-        fieldName1: value or condition,
-        fieldName2: value or condition,
+      $set: {
+        existingFieldName: newValue,
+        newFieldName: newValue,
         ...
       }
     }
-  ```
+  )
+```
 
-  The `$pull` operator removes from an existing array all values that match a specified condition.
+`filtering documents` means we are select the spcecific document that we want to update, other wise which document should update is create confusion.
 
-  Or using `$pullAll` operator,
+`$set` operator is very sensitive, because it will replace the entire filed/object/array. In the example, we pass `newFieldName` that will be create and if we pass a value instead of object then the entire object will replace by the value.
 
-  ```mongoDB
+```mongoDB
+  db.<collection name>
+  .updateMany(
+    { filtering documents },
     {
-      $pullAll: {
-        fieldName1: [ value1, value2, ... ],
+      $set: {
+        existingFieldName: newValue,
+        newFieldName: newValue,
         ...
       }
     }
-  ```
+  )
+```
 
-  The `$pullAll` operator removes all the specified values from an existing array.
+updateMany() do the same job, but update multiple documents.
 
-- **Updating embedded documents (array & object)**
+### **Removing and renaming fields**
 
-  For updation a field which is inside an array of object (embedded documents), then we can update using the positional operator `$`.
+For removing any field,
 
-  ```mongoDB
-  // document like
+```mongoDB
+  db.<collection name>
+  .updateOne(
+    { filtering documents },
     {
-      ...,
-      ...,
-      interests: [
-        {
-          bookTitle: "...",
-          bookPrice: ...,
-          authorName: "...",
-          ...
-        },
-        ...
-      ]
+      $unset: {
+        filedName: 1
+      }
     }
-  ```
+  )
+```
 
-  now for update the bookPrice field where the bookTitle is "...",
+The `$unset` method simply remove the specified field.
 
-  ```mongoDB
-   db.<collection name>
-    .updateOne(
+For renaming any field,
+
+```mongoDB
+  db.<collection name>
+  .updateOne(
+    { filtering documents },
+    {
+      $rename: {
+        oldFieldName: "newFieldName"
+      }
+    }
+  )
+```
+
+The `$rename` method simply rename the specified field.
+
+### **Adding, removing items from array**
+
+For adding a item in array,
+
+```mongoDB
+  db.<collection name>
+  .updateOne(
+    { filtering documents },
+    {
+      $push: {
+        arrayFieldName: "newElement"
+      }
+    }
+  )
+```
+
+The `$push` method simply add an item to the specified array field, and it can add duplicate items.
+
+For removing a document from an array,
+
+```mongoDB
+  db.<collection name>
+  .updateOne(
+    { filtering documents },
+    {
+      $pop: {
+        arrayFieldName: 1
+      }
+    }
+  )
+```
+
+Pass `$pop` a value of -1 to remove the first element of an array and 1 to remove the last element in an array.
+
+Or using `$pull` operator,
+
+```mongoDB
+  {
+    $pull: {
+      fieldName1: value or condition,
+      fieldName2: value or condition,
+      ...
+    }
+  }
+```
+
+The `$pull` operator removes from an existing array all values that match a specified condition.
+
+Or using `$pullAll` operator,
+
+```mongoDB
+  {
+    $pullAll: {
+      fieldName1: [ value1, value2, ... ],
+      ...
+    }
+  }
+```
+
+The `$pullAll` operator removes all the specified values from an existing array.
+
+### **Updating embedded documents (array & object)**
+
+For updation a field which is inside an array of object (embedded documents), then we can update using the positional operator `$`.
+
+```mongoDB
+// document like
+  {
+    ...,
+    ...,
+    interests: [
       {
-        _id: ...,
-        "interests.bookTitle": "..."
+        bookTitle: "...",
+        bookPrice: ...,
+        authorName: "...",
+        ...
       },
-      {
-        $set: {
-          "interests.$.bookPrice": ...
-        }
+      ...
+    ]
+  }
+```
+
+now for update the bookPrice field where the bookTitle is "...",
+
+```mongoDB
+ db.<collection name>
+  .updateOne(
+    {
+      _id: ...,
+      "interests.bookTitle": "..."
+    },
+    {
+      $set: {
+        "interests.$.bookPrice": ...
       }
-    )
-  ```
+    }
+  )
+```
 
-  This `$` positional operator identifies an element in an array to update without explicitly specifying the position of the element in the array.
+This `$` positional operator identifies an element in an array to update without explicitly specifying the position of the element in the array.
 
-  This `$` positional operator acts as a placeholder for the first element that matches the query document.
+This `$` positional operator acts as a placeholder for the first element that matches the query document.
 
 ## Delete Operations in MongoDB
 
@@ -858,101 +890,167 @@ The array is mainly the pipeline and every stage is performed one way, first `st
 
 Few aggregation frameworks operators like `$match`, `$project`, `$group`, `$sort`, `$limit`, `$addFields`, `$merge`, `$out`, `$unwind`, and many more.
 
-- **$match**
+### **$match**
 
-  The `$match` stage is similar to the `find()` method. At this stage, we can filter out documents based on the matched conditions.
+The `$match` stage is similar to the `find()` method. At this stage, we can filter out documents based on the matched conditions.
 
-  ```mongoDB
-  db.<collection name>.aggregate(
-    [
-      // stage - 1
-      {
-        $match: {
-          conditions
-        }
-      },
+```mongoDB
+db.<collection name>.aggregate(
+  [
+    // stage - 1
+    {
+      $match: {
+        conditions
+      }
+    },
 
-      ...
-    ]
-  )
-  ```
+    ...
+  ]
+)
+```
 
-  example,
+example,
 
-  ```mongoDB
-  db.<collection name>.aggregate(
-    [
-      // stage - 1
-      {
-        $match: {
-          age: {
-            $gte: 18
-          }
-        }
-      },
-
-      ...
-    ]
-  )
-  ```
-
-- **$project**
-
-  This `$project` operator is similar to `project()` method, where we can decide which fields will be include in the every documents result.
-
-  ```mongoDB
-  db.<collection name>.aggregate(
-    [
-      // stage - 1
-      {
-        $project: {
-          name: 1,
-          age: 1,
-          address: 1,
-          ...
+```mongoDB
+db.<collection name>.aggregate(
+  [
+    // stage - 1
+    {
+      $match: {
+        age: {
+          $gte: 18
         }
       }
-    ]
-  )
-  ```
+    },
 
-  We can use more operator like `$add`, `$divide`, `$multiply`, `$subtract`, ... arithmetic operation inside $project stage to reshape/transform any data.
+    ...
+  ]
+)
+```
 
-  ```mongoDB
-  db.<collection name>.aggregate(
-    [
-      // stage - 1
-      {
-        $project: {
-          name: 1,
-          bonus: {
-            $multiply: [ "$salary", 5 ]
-          },
-          ...
-        }
+### **$project**
+
+This `$project` operator is similar to `project()` method, where we can decide which fields will be include in the every documents result.
+
+```mongoDB
+db.<collection name>.aggregate(
+  [
+    // stage - 1
+    {
+      $project: {
+        name: 1,
+        age: 1,
+        address: 1,
+        ...
       }
-    ]
-  )
-  ```
+    }
+  ]
+)
+```
 
-  `bonus` field is created in the $project stage and this type of operation we can't do in `project()` method.
+We can use more operator like `$add`, `$divide`, `$multiply`, `$subtract`, ... arithmetic operation inside $project stage to reshape/transform any data.
 
-  The result documents will have only these fields.<br><br>
+```mongoDB
+db.<collection name>.aggregate(
+  [
+    // stage - 1
+    {
+      $project: {
+        name: 1,
+        bonus: {
+          $multiply: [ "$salary", 5 ]
+        },
+        ...
+      }
+    }
+  ]
+)
+```
 
-- **$group**
+`bonus` field is created in the $project stage and this type of operation we can't do in `project()` method.
 
-  The `$group` stage groups the documents by specified fields and performs aggregate operations on grouped data.
+The result documents will have only these fields.<br><br>
+
+### **$group**
+
+The `$group` stage groups the documents by specified fields and performs aggregate operations on grouped data.
+
+```mongoDB
+db.<collection name>.aggregate(
+[
+  // stage - 1
+  {
+    $group: {
+      _id: "<field name for grouping>", // required
+      field1: { // optional
+        <accumulator1> : <expression1>,
+        ...
+      }
+    }
+  }
+]
+)
+```
+
+`-id` is create the group based on field that we provide, and there is some `accumulator` operators we can use to perform any specific operations on group data.
+
+| Accumulator Operator |
+| -------------------- |
+| $avg                 |
+| $count               |
+| $max                 |
+| $min                 |
+| $sum                 |
+| $push                |
+| ...                  |
+| ...                  |
+
+- $avg
 
   ```mongoDB
   db.<collection name>.aggregate(
   [
-    // stage - 1
+    $group: {
+      _id: "$gender",
+      avg: {
+          $avg: "$age"
+      }
+
+    }
+  ]
+  )
+  ```
+
+  The `$avg` operator will avg the `age` of every documents of the group. So, if 5 different groups are created then each group has few documents and $avg operator will calculate avg for 5 different groups.
+
+  ```mongoDB
+    // output look like,
+
+    // group 1
+    {
+      "_id" : "Male",
+      "avg" : 47.21052631578947
+    },
+
+    // group 2
+    {
+      "_id" : "Female",
+      "avg" : 56.4
+    },
+
+    ...
+  ```
+
+- $count
+
+  ```mongoDB
+  db.<collection name>.aggregate(
+  [
     {
       $group: {
-        _id: "<field name for grouping>", // required
-        field1: { // optional
-          <accumulator1> : <expression1>,
-          ...
+        _id: "$gender",
+        count: {
+            $count: {}
         }
       }
     }
@@ -960,255 +1058,193 @@ Few aggregation frameworks operators like `$match`, `$project`, `$group`, `$sort
   )
   ```
 
-  `-id` is create the group based on field that we provide, and there is some `accumulator` operators we can use to perform any specific operations on group data.
+  The `$count` operator will count the total documents number for each group. This `$count` operator does not accept any parameters.
 
-  | Accumulator Operator |
-  | -------------------- |
-  | $avg                 |
-  | $count               |
-  | $max                 |
-  | $min                 |
-  | $sum                 |
-  | $push                |
-  | ...                  |
-  | ...                  |
+- $max
 
-  - $avg
-
-    ```mongoDB
-    db.<collection name>.aggregate(
-    [
+  ```mongoDB
+  db.<collection name>.aggregate(
+  [
+    {
       $group: {
         _id: "$gender",
-        avg: {
-            $avg: "$age"
+        maxAge: {
+            $max: "$age"
         }
 
       }
-    ]
-    )
-    ```
-
-    The `$avg` operator will avg the `age` of every documents of the group. So, if 5 different groups are created then each group has few documents and $avg operator will calculate avg for 5 different groups.
-
-    ```mongoDB
-      // output look like,
-
-      // group 1
-      {
-        "_id" : "Male",
-        "avg" : 47.21052631578947
-      },
-
-      // group 2
-      {
-        "_id" : "Female",
-        "avg" : 56.4
-      },
-
-      ...
-    ```
-
-  - $count
-
-    ```mongoDB
-    db.<collection name>.aggregate(
-    [
-      {
-        $group: {
-          _id: "$gender",
-          count: {
-              $count: {}
-          }
-        }
-      }
-    ]
-    )
-    ```
-
-    The `$count` operator will count the total documents number for each group. This `$count` operator does not accept any parameters.
-
-  - $max
-
-    ```mongoDB
-    db.<collection name>.aggregate(
-    [
-      {
-        $group: {
-          _id: "$gender",
-          maxAge: {
-              $max: "$age"
-          }
-
-        }
-      }
-    ]
-    )
-    ```
-
-    The `$max` operator returns the maximum value of specified field for each group.
-
-    The syntax is same for `$min`, `$sum`.<br><br>
-
-  - $push
-
-    ```mongoDB
-    db.<collection name>.aggregate(
-    [
-     {
-       $group: {
-        _id: "$gender",
-        emails: {
-            $push: "$email"
-        }
-
-       }
-     }
-    ]
-    )
-    ```
-
-    The `$push` operator push all the specified field into an array for each group.
-
-    There are more `accumulator` operators but these are commonly used.<br><br>
-
-- **$sort**
-  This is also similar to `sort()` method.
-
-  ```mongoDB
-   db.<collection name>.aggregate(
-   [
-     {
-        $sort: {
-            age: 1
-        }
-     }
-   ]
-   )
+    }
+  ]
+  )
   ```
 
-- **$limit**
-  This is also similar to `limit()` method.
+  The `$max` operator returns the maximum value of specified field for each group.
+
+  The syntax is same for `$min`, `$sum`.<br><br>
+
+- $push
 
   ```mongoDB
-   db.<collection name>.aggregate(
-   [
-     {
-        $limit: 5 // positive 64-bit integer
-     }
-   ]
-   )
-  ```
-
-- **$addFields**
-  This operator is for adding new field to the group documents
-
-  ```mongoDB
-   db.<collection name>.aggregate(
-   [
-     {
-         $addFields: {
-            <newField>: <new value>,
-            ...
-          }
-     }
-   ]
-   )
-  ```
-
-  But, new fileds is not add to the main collection because we are still finding documents based on some condition and operation not updating the collection.<br><br>
-
-- **$merge**
-
-  `$addFields` is not add the main collection, So, for adding new fields to the main collection we can use `$merge` operator.
-
-  ```mongoDB
-   db.<collection name>.aggregate(
-   [
-    {
-      ...
-    },
-
-    ...,
-
-    // the last stage
-     {
-         $merge: "<collection name>"
-     }
-   ]
-   )
-  ```
-
-  > :warning: The $merge stage must be the last stage in the pipeline.
-
-- **$out**
-
-  Sometimes we may need to create a new collection based on the aggregation result, and then the `$out` operator does this task.
-
-  ```mongoDB
-   db.<collection name>.aggregate(
-   [
-    {
-      ...
-    },
-
-    ...,
-
-    // the last stage
-     {
-         $out: "<output collection name>"
-         // or
-         $out: {
-            db: "<output db name>",
-            coll: "<output collection name>"
-          }
-     }
-   ]
-   )
-  ```
-
-  > :warning: The $out stage must be the last stage in the pipeline.
-
-- **$unwind**
-  Deconstructs an array field from the input documents to output a document for each element. Each output document is the input document with the value of the array field replaced by the element.
-
-  ```mongoDB
-   // demo document
+  db.<collection name>.aggregate(
+  [
    {
-    _id: ...,
-    skills: [ "...", "...", "...", ... ],
-    ...
+     $group: {
+      _id: "$gender",
+      emails: {
+          $push: "$email"
+      }
+
+     }
    }
+  ]
+  )
   ```
 
-  Now `$unwind` will deconstructs the skills array and create multiple documents for the same `_id` with single skills element.
+  The `$push` operator push all the specified field into an array for each group.
 
-  ```mongoDB
-   db.<collection name>.aggregate(
-   [
-     {
-         $unwind: <array field name>
-     },
-     {
-      ...
-     },
-     ...
-   ]
-   )
-  ```
+  There are more `accumulator` operators but these are commonly used.<br><br>
 
-  Now `$unwind` create documents like,
+### **$sort**
 
-  ```mongoDB
+This is also similar to `sort()` method.
+
+```mongoDB
+ db.<collection name>.aggregate(
+ [
    {
-    _id: 123,
-    skills: <first element>,
+      $sort: {
+          age: 1
+      }
+   }
+ ]
+ )
+```
+
+### **$limit**
+
+This is also similar to `limit()` method.
+
+```mongoDB
+ db.<collection name>.aggregate(
+ [
+   {
+      $limit: 5 // positive 64-bit integer
+   }
+ ]
+ )
+```
+
+### **$addFields**
+
+This operator is for adding new field to the group documents
+
+```mongoDB
+ db.<collection name>.aggregate(
+ [
+   {
+       $addFields: {
+          <newField>: <new value>,
+          ...
+        }
+   }
+ ]
+ )
+```
+
+But, new fileds is not add to the main collection because we are still finding documents based on some condition and operation not updating the collection.<br><br>
+
+### **$merge**
+
+`$addFields` is not add the main collection, So, for adding new fields to the main collection we can use `$merge` operator.
+
+```mongoDB
+ db.<collection name>.aggregate(
+ [
+  {
+    ...
+  },
+
+  ...,
+
+  // the last stage
+   {
+       $merge: "<collection name>"
+   }
+ ]
+ )
+```
+
+> :warning: The $merge stage must be the last stage in the pipeline.
+
+### **$out**
+
+Sometimes we may need to create a new collection based on the aggregation result, and then the `$out` operator does this task.
+
+```mongoDB
+ db.<collection name>.aggregate(
+ [
+  {
+    ...
+  },
+
+  ...,
+
+  // the last stage
+   {
+       $out: "<output collection name>"
+       // or
+       $out: {
+          db: "<output db name>",
+          coll: "<output collection name>"
+        }
+   }
+ ]
+ )
+```
+
+> :warning: The $out stage must be the last stage in the pipeline.
+
+### **$unwind**
+
+Deconstructs an array field from the input documents to output a document for each element. Each output document is the input document with the value of the array field replaced by the element.
+
+```mongoDB
+ // demo document
+ {
+  _id: ...,
+  skills: [ "...", "...", "...", ... ],
+  ...
+ }
+```
+
+Now `$unwind` will deconstructs the skills array and create multiple documents for the same `_id` with single skills element.
+
+```mongoDB
+ db.<collection name>.aggregate(
+ [
+   {
+       $unwind: <array field name>
    },
    {
-    _id: 123,
-    skills: <second element>,
+    ...
    },
    ...
-  ```
+ ]
+ )
+```
 
-  `$unwind` is useful with `$group`.
+Now `$unwind` create documents like,
+
+```mongoDB
+ {
+  _id: 123,
+  skills: <first element>,
+ },
+ {
+  _id: 123,
+  skills: <second element>,
+ },
+ ...
+```
+
+`$unwind` is useful with `$group`.
