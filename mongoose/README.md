@@ -49,4 +49,4 @@ Benefits of using schema,
   <br>
 
 - **Indexes**
-  Allow to create index based on specific fileds to improve performance
+  Allow to create index based on specific fileds to improve performance.
