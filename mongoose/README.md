@@ -50,3 +50,64 @@ Benefits of using schema,
 
 - **Indexes**
   Allow to create index based on specific fileds to improve performance.
+
+## Schema Types
+
+To define schema, we have to specify every field type using valid schema types. Mongoose provide various types such as
+
+- String
+
+  ```mongoDB
+  const schema1 = new Schema({ name: String });
+  ```
+
+- Number
+
+  ```mongoDB
+  const schema1 = new Schema({ age: Number });
+  ```
+
+- Date
+
+  ```mongoDB
+    const schema1 = new Schema({ createdAt: Date });
+  ```
+
+- Buffer
+
+  ```mongoDB
+    const schema1 = new Schema({ binData: Buffer });
+  ```
+
+- Boolean
+
+  ```mongoDB
+    const schema1 = new Schema({ isActive: Boolean });
+  ```
+
+- Mixed
+
+  ```mongoDB
+    const schema1 = new Schema({ any: Schema.Types.Mixed });
+  ```
+
+- ObjectId
+
+  ```mongoDB
+    const schema1 = new Schema({ user: Schema.Types.ObjectId });
+  ```
+
+- Array
+
+  ```mongoDB
+    const schema1 = new Schema({ numbers: [Number] });
+    const schema2 = new Schema({ hobbies: [String] });
+  ```
+
+- BigInt
+
+  ```mongoDB
+    const schema1 = new Schema({ number: BigInt });
+  ```
+
+These schema types are commonly used in mongoDB.
