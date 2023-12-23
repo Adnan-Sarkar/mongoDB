@@ -1,6 +1,8 @@
 ## Table of Contents
 
 1. [Introduction to Mongoose](#introduction-to-mongoose)
+2. [Schema](#schema)
+3. [Schema Types](#schema-types)
    <br>
 
 # Introduction to Mongoose
