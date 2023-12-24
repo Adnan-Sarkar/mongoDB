@@ -3,6 +3,7 @@
 1. [Introduction to Mongoose](#introduction-to-mongoose)
 2. [Schema](#schema)
 3. [Schema Types](#schema-types)
+4. [Create Schema](#create-schema)
    <br>
 
 # Introduction to Mongoose
@@ -113,3 +114,85 @@ To define schema, we have to specify every field type using valid schema types. 
   ```
 
 These schema types are commonly used in mongoDB.
+
+## Create Schema
+
+```mongoDB
+  const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    id: Number,
+    ...
+  })
+
+  // another way
+
+  const userSchema = new mongoose.Schema({
+    name: {
+      type: String
+    },
+    email: {
+      type: String
+    },
+    id: {
+      type: Number
+    },
+    ...
+  })
+```
+
+We can define basic rules on schema so that we can't create new documents without fulfilling these requirements.
+
+```mongoDB
+  const userSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: Number,
+      min: 1,
+      max: 100,
+      required: true
+    },
+    ...
+  })
+```
+
+We can't create document without providing the `required` fields and other rules like `min,max` etc.
+
+We can define validation also.
+
+```mongoDB
+  const userSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function (value) {
+          return /\S+@\S+\.\S+/.test(value);
+        },
+        message: 'Invalid email format'
+      }
+    },
+    id: {
+      type: Number,
+      min: 1,
+      max: 100,
+      required: true
+    },
+    ...
+  })
+```
+
+There are more options we can apply to our schema.
