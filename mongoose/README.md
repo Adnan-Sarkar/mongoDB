@@ -196,3 +196,26 @@ We can define validation also.
 ```
 
 There are more options we can apply to our schema.
+
+## Create Model
+
+After creating a schema for a document our next target is to create actual document in the database. Mongoose mode is the way to interact with mongoDB collection. So, to create real documents we need a model.
+
+```mongoDB
+  const User = model("User", userSchema);
+```
+
+Creating a model is very simple, we need to pass the collection name and the schema for that collection.
+
+Now, we can create a new document using this model.
+
+```mongoDB
+  User.create({
+    name: "...",
+    email: "...",
+    id: ...,
+    ...
+  })
+```
+
+Using create method we can create a new document of users collection.
