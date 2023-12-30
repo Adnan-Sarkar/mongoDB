@@ -219,3 +219,26 @@ Now, we can create a new document using this model.
 ```
 
 Using create method we can create a new document of users collection.
+
+## Query methods
+
+Using `ODM` like mongoose is useful because they provide us many useful methods to qurey our collections such as finding documents, updating documents etc.
+
+### find
+
+`find()` is the most popular query method to retrieved documents from a collection.
+
+```mongoDB
+  User.find();
+```
+
+This find method will return all documents from `User` collection. We can filtering the documents based on some conditions using mongoDB operators like `$in`, `$gte`, `$eq` etc.
+To filtering documents, we have to pass an argument object and the find method will return those documents that fulfilled our filtering conditions.
+
+```mongoDB
+  User.find({
+    name: "..."
+  });
+```
+
+This query returns that documents which are same as filtered name.
