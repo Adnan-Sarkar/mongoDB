@@ -4,6 +4,9 @@
 2. [Schema](#schema)
 3. [Schema Types](#schema-types)
 4. [Create Schema](#create-schema)
+5. [Create Model](#create-model)
+6. [Query methods](#query-methods)
+   6.1. [find](#find)
    <br>
 
 # Introduction to Mongoose
