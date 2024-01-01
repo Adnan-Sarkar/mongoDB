@@ -245,3 +245,13 @@ To filtering documents, we have to pass an argument object and the find method w
 ```
 
 This query returns that documents which are same as filtered name.
+
+### findById
+
+This method will find that document which id is same as argument's id and id should be mongoDb document's `_id`.
+
+```mongoDB
+  User.findById(id);
+```
+
+`findById` return single document because mongoDB `_id` is unique.
