@@ -7,6 +7,7 @@
 5. [Create Model](#create-model)
 6. [Query methods](#query-methods)
    6.1. [find](#find)
+   6.2. [findById](#findbyid)
    <br>
 
 # Introduction to Mongoose
