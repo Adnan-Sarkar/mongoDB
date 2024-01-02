@@ -256,3 +256,13 @@ This method will find that document which id is same as argument's id and id sho
 ```
 
 `findById` return single document because mongoDB `_id` is unique.
+
+### findOne
+
+This method is same as `find` and just return a single document based on provided condition.
+
+```mongoDB
+  User.findOne({
+    name: "..."
+  });
+```
