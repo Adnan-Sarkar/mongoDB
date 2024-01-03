@@ -270,3 +270,25 @@ This method is same as `find` and just return a single document based on provide
     name: "..."
   });
 ```
+
+These three `find`, `findById` and `findOne` methods are commonly used for searching documents from a collection.
+
+## Updating Documents Queries
+
+### updateOne
+
+This method is used for update single document from a collection.
+
+`updateOne` method accept minimum 2 arguments. First argument is filtered condition for getting specified document for update. Second argument is the updated information such as which field should update and the data.
+
+```mongoDB
+  User.updateOne({
+    name: "..."
+  },
+  {
+    $set: { age: 30 }
+  }
+  );
+```
+
+In the example code, first find the document which have the specified name, then update that document's age field with the updated data.
