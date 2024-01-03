@@ -6,8 +6,10 @@
 4. [Create Schema](#create-schema)
 5. [Create Model](#create-model)
 6. [Query methods](#query-methods)
-   6.1. [find](#find)
-   6.2. [findById](#findbyid)
+7. [Searching Documents Queries](#searching-documents-queries)
+   7.1. [find](#find)
+   7.2. [findById](#findbyid)
+   7.3. [findOne](#findone)
    <br>
 
 # Introduction to Mongoose
@@ -227,6 +229,8 @@ Using create method we can create a new document of users collection.
 ## Query methods
 
 Using `ODM` like mongoose is useful because they provide us many useful methods to qurey our collections such as finding documents, updating documents etc.
+
+## Searching Documents Queries
 
 ### find
 
