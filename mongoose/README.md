@@ -292,3 +292,19 @@ This method is used for update single document from a collection.
 ```
 
 In the example code, first find the document which have the specified name, then update that document's age field with the updated data.
+
+### updateMany
+
+This method is same as `updateOne` but the difference is `updateOne` updates only one document and `updateMany` updates multiple documents.
+
+```mongoDB
+  User.updateMany({
+    age: 30
+  },
+  {
+    $set: { salary: 30000 }
+  }
+  );
+```
+
+Firstly get that documents based on the condition then update all that documents with provided value. Here, condition is to find those documents whose age is 30 then update their salary field value 30000.
