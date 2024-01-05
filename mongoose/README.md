@@ -311,3 +311,19 @@ This method is same as `updateOne` but the difference is `updateOne` updates onl
 ```
 
 Firstly get that documents based on the condition then update all that documents with provided value. Here, condition is to find those documents whose age is 30 then update their salary field value 30000.
+
+### findOneAndUpdate
+
+This method is same as `updateOne`, here we have to pass find condition firstly then update info for that document.
+
+```mongoDB
+  User.findOneAndUpdate({
+    name: "..."
+  },
+  {
+    $set: { age: 30 }
+  }
+  );
+```
+
+Here, firstly this method find the document which name is provided by first argument, then it will update this document by second argument.
