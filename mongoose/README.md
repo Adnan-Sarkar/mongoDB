@@ -10,6 +10,9 @@
    7.1. [find](#find)
    7.2. [findById](#findbyid)
    7.3. [findOne](#findone)
+8. [Updating Documents Queries](#updating-documents-queries)
+   8.1. [updateOne](#updateone)
+   8.2. [updateMany](#updatemany)
    <br>
 
 # Introduction to Mongoose
