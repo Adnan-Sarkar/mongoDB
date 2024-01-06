@@ -335,9 +335,26 @@ This method takes an id mongoDb `_id` as first argument and update info as secon
 
 ```mongoDB
   User.findByIdAndUpdate(
-  id,
-  {
-    $set: { age: 30 }
-  }
+    id,
+    {
+      $set: { age: 30 }
+    }
   );
+```
+
+### findOneAndReplace
+
+The `findOneAndReplace` method in Mongoose is used to find a single document from a collection that matches the specified conditions, replace it with the provided replacement document
+
+```mongoDB
+  User.findOneAndReplace(
+    {
+    name: "..."
+    },
+    {
+      name: "...",
+      age: 50
+    }
+  );
+
 ```
