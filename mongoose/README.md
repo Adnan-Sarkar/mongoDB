@@ -14,6 +14,8 @@
    8.1. [updateOne](#updateone)
    8.2. [updateMany](#updatemany)
    8.3. [findOneAndUpdate](#findoneandupdate)
+   8.4. [findByIdAndUpdate](#findbyidandupdate)
+   8.5. [findOneAndReplace](#findoneandreplace)
    <br>
 
 # Introduction to Mongoose
