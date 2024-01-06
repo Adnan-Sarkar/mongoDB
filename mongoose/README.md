@@ -13,6 +13,7 @@
 8. [Updating Documents Queries](#updating-documents-queries)
    8.1. [updateOne](#updateone)
    8.2. [updateMany](#updatemany)
+   8.3. [findOneAndUpdate](#findoneandupdate)
    <br>
 
 # Introduction to Mongoose
