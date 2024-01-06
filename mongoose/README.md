@@ -328,3 +328,16 @@ This method is same as `updateOne`, here we have to pass find condition firstly 
 ```
 
 Here, firstly this method find the document which name is provided by first argument, then it will update this document by second argument.
+
+### findByIdAndUpdate
+
+This method takes an id mongoDb `_id` as first argument and update info as second argument. It's almost similar to `findOneAndUpdate` method, where `findByIdAndUpdate` method is filter specific document by using mongoDB `_id` which is unique.
+
+```mongoDB
+  User.findByIdAndUpdate(
+  id,
+  {
+    $set: { age: 30 }
+  }
+  );
+```
