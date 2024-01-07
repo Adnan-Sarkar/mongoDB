@@ -400,3 +400,13 @@ This method at first find the document based on condition, then delete it from t
     }
   );
 ```
+
+### findByIdAndDelete
+
+The `findByIdAndDelete` method takes mongoDB `_id` as first argument and then delete it.
+
+```mongoDB
+  User.findByIdAndDelete(id);
+```
+
+Make sure that value of id must be mongoDB `_id`.
