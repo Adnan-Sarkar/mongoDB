@@ -360,3 +360,19 @@ The `findOneAndReplace` method in Mongoose is used to find a single document fro
   );
 
 ```
+
+## Deleting Documents Queries
+
+### deleteOne
+
+This `deleteOne` method simply delete a single document based on filtering condition.
+
+```mongoDB
+  User.deleteOne(
+    {
+      name: "..."
+    }
+  );
+```
+
+It's find the document with provided name field, then delete the document from the collection.
