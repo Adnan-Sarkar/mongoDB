@@ -376,3 +376,15 @@ This `deleteOne` method simply delete a single document based on filtering condi
 ```
 
 It's find the document with provided name field, then delete the document from the collection.
+
+### deleteMany
+
+It's same as `deleteOne`, the main difference is `deleteMany` delete multiple documents.
+
+```mongoDB
+  User.deleteMany(
+    {
+      name: "..."
+    }
+  );
+```
