@@ -388,3 +388,15 @@ It's same as `deleteOne`, the main difference is `deleteMany` delete multiple do
     }
   );
 ```
+
+### findOneAndDelete
+
+This method at first find the document based on condition, then delete it from the collection.
+
+```mongoDB
+  User.findOneAndDelete(
+    {
+      name: "..."
+    }
+  );
+```
