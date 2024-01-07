@@ -16,6 +16,11 @@
    8.3. [findOneAndUpdate](#findoneandupdate)
    8.4. [findByIdAndUpdate](#findbyidandupdate)
    8.5. [findOneAndReplace](#findoneandreplace)
+9. [Deleting Documents Queries](#deleting-documents-queries)
+   9.1. [deleteOne](#deleteone)
+   9.2. [deleteMany](#deletemany)
+   9.3. [findOneAndDelete](#findoneanddelete)
+   9.4. [findByIdAndDelete](#findbyidanddelete)
    <br>
 
 # Introduction to Mongoose
