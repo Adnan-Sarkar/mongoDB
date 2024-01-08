@@ -415,3 +415,9 @@ The `findByIdAndDelete` method takes mongoDB `_id` as first argument and then de
 ```
 
 Make sure that value of id must be mongoDB `_id`.
+
+## Mongoose Middleware
+
+In mongoose, middleware functions that can be executed at certain points in the lifecyle of a document. We can implement logic inside middleware function which can be executed `before` or `after` saving/updating/removing documents.
+
+In mongoose, there are 2 types of middleware functions: `Document middleware` and `Query middleware`.
