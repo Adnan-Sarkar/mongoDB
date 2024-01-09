@@ -422,3 +422,18 @@ Make sure that value of id must be mongoDB `_id`.
 In mongoose, middleware functions that can be executed at certain points in the lifecyle of a document. We can implement logic inside middleware function which can be executed `before` or `after` saving/updating/removing documents.
 
 In mongoose, there are 2 types of middleware functions: `Document middleware` and `Query middleware`.
+
+### Document middleware
+
+Document middleware functions are executed on instances of Mongoose documents. Common hooks include `pre` and `post` hooks for operations like save/validate/remove etc. So, we can apply document middleware funtion based on our document, where we can apply logic in document before or after create of that document.
+
+```mongoDB
+  userSchema.pre('save', function (next) {
+    this.name = "...";
+
+    next();
+  });
+
+```
+
+We can apply middleware in `schema`, then `pre` is middleware that execute before creating the document in the collection. First argument `save` means this middleware will be execute before creating new document, we can create new document using static method `create()` or instance method `save()`. Second argument is a callback function, and the last statement must be `next()` as it's a middleware, otherwise it will stuck here and we can't create our document. At last, `this` refer to our document.
