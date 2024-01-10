@@ -438,3 +438,20 @@ Document middleware functions are executed on instances of Mongoose documents. C
 ```
 
 We can apply middleware in `schema`, then `pre` is middleware that execute before creating the document in the collection. First argument `save` means this middleware will be execute before creating new document, we can create new document using static method `create()` or instance method `save()`. Second argument is a callback function, and the last statement must be `next()` as it's a middleware, otherwise it will stuck here and we can't create our document. At last, `this` refer to our document.
+
+### Query middleware
+
+Query middleware allow us to attach custom logic before/after query related operations. The main differenc between query and document middleware that one works with query and another works with document.
+
+Query related operations such as `find`, `findOne`, `updateOne`, `deleteOne` etc.
+
+We can use `pre` or `post` hooks same as document middleware to define when it execute.
+
+```mongoDB
+  userSchema.pre('find', function (next) {
+    // Custom logic before executing a find query
+
+    next();
+  });
+
+```
