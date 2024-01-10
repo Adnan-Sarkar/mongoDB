@@ -23,6 +23,7 @@
    9.4. [findByIdAndDelete](#findbyidanddelete)
 10. [Mongoose Middleware](#mongoose-middleware)
     10.1. [Document middleware](#document-middleware)
+    10.2. [Query middleware](#query-middleware)
     <br>
 
 # Introduction to Mongoose
