@@ -456,3 +456,23 @@ We can use `pre` or `post` hooks same as document middleware to define when it e
   });
 
 ```
+
+## Static methods
+
+In mongoose, `statics` is a way to define static methods for mongoose model. Static methods are functions that are associated with the model itself rather than the instance of the model. So, we can perform operation to the entire collection/class, rather than on individual documents.
+
+To create a document, we used `create()` method that is a static method from model.
+
+```mongoDB
+  userSchema.statics.findByAge = function (age) {
+  return this.find({ age });
+};
+```
+
+This `findByAge` is our custom static method. To create a static method we have to use our schema. Every schema has `statics` property for creating static methods. Inside static method (using function keyword) `this` refers to the model itself.
+
+Now if we want to use static method then we can using it by the model.
+
+```mongoDB
+  await User.findByAge(25);
+```
