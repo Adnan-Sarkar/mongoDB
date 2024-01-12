@@ -24,6 +24,7 @@
 10. [Mongoose Middleware](#mongoose-middleware)
     10.1. [Document middleware](#document-middleware)
     10.2. [Query middleware](#query-middleware)
+11. [Static Methods](#static-methods)
     <br>
 
 # Introduction to Mongoose
@@ -457,7 +458,7 @@ We can use `pre` or `post` hooks same as document middleware to define when it e
 
 ```
 
-## Static methods
+## Static Methods
 
 In mongoose, `statics` is a way to define static methods for mongoose model. Static methods are functions that are associated with the model itself rather than the instance of the model. So, we can perform operation to the entire collection/class, rather than on individual documents.
 
