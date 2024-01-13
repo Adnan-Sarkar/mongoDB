@@ -25,6 +25,7 @@
     10.1. [Document middleware](#document-middleware)
     10.2. [Query middleware](#query-middleware)
 11. [Static Methods](#static-methods)
+12. [Instance Methods](#instance-methods)
     <br>
 
 # Introduction to Mongoose
