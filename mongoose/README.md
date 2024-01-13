@@ -477,3 +477,27 @@ Now if we want to use static method then we can using it by the model.
 ```mongoDB
   await User.findByAge(25);
 ```
+
+## Instance Methods
+
+Instance is mainly object which is created by `new` keyword.
+
+```mongoDB
+  const userInstance = new User({...});
+```
+
+Here `userInstance` is a instance of `User` model. Now, we can create instance method same as static methods.
+
+```mongoDB
+  userSchema.methods.sayHello = function () {
+    console.log(`Hello, my name is ${this.name}`);
+  };
+```
+
+While creating static method we used `statics` property from schema, and creating instance method we have to use `methods` property.
+
+The `this` keyword inside the instance method refers to the specific document instance on which the method is called.
+
+```mongoDB
+  userInstance.sayHello();
+```
