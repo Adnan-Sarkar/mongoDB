@@ -502,3 +502,7 @@ The `this` keyword inside the instance method refers to the specific document in
 ```mongoDB
   userInstance.sayHello();
 ```
+
+## Transaction
+
+In Mongoose, transactions provide a way to perform multiple database operations as a single atomic unit. This means that either all operations within the transaction succeed otherwise all fail. Transaction give us to ensure data integrity and consistency during multiple database operations.
