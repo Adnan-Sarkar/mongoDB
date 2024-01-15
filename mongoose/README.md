@@ -26,6 +26,7 @@
     10.2. [Query middleware](#query-middleware)
 11. [Static Methods](#static-methods)
 12. [Instance Methods](#instance-methods)
+13. [Transaction](#transaction)
     <br>
 
 # Introduction to Mongoose
@@ -506,3 +507,45 @@ The `this` keyword inside the instance method refers to the specific document in
 ## Transaction
 
 In Mongoose, transactions provide a way to perform multiple database operations as a single atomic unit. This means that either all operations within the transaction succeed otherwise all fail. Transaction give us to ensure data integrity and consistency during multiple database operations.
+
+```mongoDB
+
+  const session = await mongoose.startSession();
+
+  session.startTransaction();
+
+  try {
+    // Find a user within the transaction
+    const user = await User.findOne(
+      { name: "..." }
+    ).session(session);
+
+    ...
+    ...
+
+    // update a user within the transaction
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        $inc: { age: 1 }
+      },
+      {
+        session
+      }
+    );
+
+    ...
+    ...
+
+    // If everything is successful, commit the transaction
+    await session.commitTransaction();
+  }
+  catch (error) {
+    // If any operation fails, roll back the transaction
+    await session.abortTransaction();
+  }
+  finally {
+    // End the session
+    await session.endSession();
+  }
+```
